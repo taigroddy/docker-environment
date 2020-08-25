@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  traefik:
+    image: traefik
+    networks:
+      - traefik
+    environment:
+      - LETS_ENCRYPT_TEST_MODE=false
+      - LETS_ENCRYPT_EMAIL=trong.tran@sstechvn.com
+      - SWARM_MODE=true
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik:
+    name: traefik_proxy
+    driver: overlay
+

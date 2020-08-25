@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  traefik:
+    image: traefik:1.7-alpine
+    networks:
+      - traefik
+    ports:
+      - 8080:8080
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./certs:/certs
+      - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:traefik.local.dev"
+      - "traefik.port=8080"
+
+networks:
+  traefik:
+    name: traefik_proxy
+    driver: bridge
+

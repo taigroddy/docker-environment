@@ -1,0 +1,39 @@
+# Change this if needed
+logLevel = "ERROR"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+  [entryPoints.https.tls]
+    [[entryPoints.https.tls.certificates]]
+      certFile = "/etc/letsencrypt/live/sstechvn.com/cert.pem"
+      keyFile = "/etc/letsencrypt/live/sstechvn.com/privkey.pem"
+
+# REMOVE this section if you don't want the dashboard/API
+[api]
+entryPoint = "traefik"
+dashboard = true
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "local.dev"
+watch = true
+# I prefer to expose my containers explicitly
+exposedbydefault = false
+
+[rest]
+
+[acme]
+email = "trong.tran@sstechvn.com"
+storage = "acme.json"
+entryPoint = "https"
+OnHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
