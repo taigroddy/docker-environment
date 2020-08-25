@@ -1,0 +1,6 @@
+/** Create new user */
+CREATE USER 'newuser'@'localhost' IDENTIFIED VIA pam USING 'mariadb';
+/** User with password */
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+/** GRANT ALL PRIVILEGES */
+GRANT ALL ON angento_magento.* TO 'newuser'@'%';
