@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123123
+      - POSTGRES_DB=postgresdb
+    networks:
+      - traefik
+    ports:
+      - 5432:5432
+
+networks:
+  traefik:
+    external:
+      name: traefik_proxy
