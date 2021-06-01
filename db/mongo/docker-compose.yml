@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+
+
+networks:
+  traefik:
+    external:
+      name: traefik_proxy
