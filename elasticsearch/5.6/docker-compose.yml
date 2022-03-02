@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  elasticsearch:
+    image: bitnami/elasticsearch:5.6.16
+    restart: always
+    container_name: elasticsearch_5.6
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    networks:
+      - traefik
+    
+networks:
+  traefik:
+    external:
+      name: traefik_proxy
+
+volumes:
+  elasticsearch_data:
